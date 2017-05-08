@@ -45,16 +45,18 @@ print(" > Because Facebook does not store the second at which a message was sent
 
 # Pre-defined helper methods
 def format_messages(s, e=0):
+    if(s < 0): return
     ret = ""
-    e = max(e, s+1)
+    e = s+50 if e == 0 else max(e,s+1)
     for i in range(s, e):
         m = messages[i]
-        ret += "{} - {}: {}".format(
+        ret += "({}) {} - {}: {}\n".format(
+            m['id'],
             m['date'].strftime("%m/%d/%y %H:%M"),
             m['user'],
             m['text']
         )
-    return ret
+    return ret[:-1] # Cut last '\n'
 
 IPython.embed()
 
